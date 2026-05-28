@@ -40,7 +40,7 @@ public class AuthorController {
   }
 
   @PutMapping("/{id}")
-  Author replaceBook(@RequestBody Author author, @PathVariable Long id) {
+  Author replaceAuthor(@RequestBody Author author, @PathVariable Long id) {
     return authorRepository.findById(id)
         .map(existing -> {
           existing.setFirstName(author.getFirstName());
@@ -51,7 +51,7 @@ public class AuthorController {
   }
 
   @DeleteMapping("/{id}")
-  void deleteBook(@PathVariable Long id) {
+  void deleteAuthor(@PathVariable Long id) {
     authorRepository.deleteById(id);
   }
 }
