@@ -1,0 +1,45 @@
+<section class="book-list">
+  <header class="book-list__header">
+    <h1>Browse books</h1>
+    <button mat-stroked-button color="primary" (click)="fetchBooks()" [disabled]="loading()">
+      <mat-icon>refresh</mat-icon>
+      <span>Refresh</span>
+    </button>
+  </header>
+
+  @if (loading()) {
+    <div class="book-list__state">
+      <mat-spinner diameter="40"></mat-spinner>
+      <p>Loading books…</p>
+    </div>
+  } @else if (error()) {
+    <div class="book-list__state book-list__state--error">
+      <mat-icon>error_outline</mat-icon>
+      <p>{{ error() }}</p>
+    </div>
+  } @else if (books().length === 0) {
+    <div class="book-list__state">
+      <mat-icon>menu_book</mat-icon>
+      <p>No books yet. Add one via <code>POST /api/books</code>.</p>
+    </div>
+  } @else {
+    <div class="book-grid">
+        <mat-card appearance="outlined" class="book-card"
+         *ngFor="let book of books()"
+        [routerLink]="['/books', book.id]"
+        matRipple>
+          <mat-card-header>
+            <mat-card-title>{{ book.title }}</mat-card-title>
+            <mat-card-subtitle>{{ authorNames(book) }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p class="book-card__description">{{ book.description }}</p>
+          </mat-card-content>
+          <mat-card-actions align="end">
+            <span class="book-card__price">{{ book.price | currency:'EUR' }}</span>
+          </mat-card-actions>
+        </mat-card>
+              
+    </div>
+  }
+</section>

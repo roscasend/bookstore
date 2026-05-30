@@ -1,0 +1,21 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  gap: 0.5rem;
+}
+
+.app-toolbar__title {
+  font: var(--mat-sys-title-large);
+}
+
+.app-main {
+  flex: 1;
+  width: 100%;
+}
